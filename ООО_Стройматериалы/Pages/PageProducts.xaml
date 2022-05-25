@@ -1,0 +1,79 @@
+﻿<Page x:Class="ООО_Стройматериалы.Pages.PageProducts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ООО_Стройматериалы.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageProducts">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Товары" Grid.Row="0" HorizontalAlignment="Center"/>
+
+        <TextBox Name="tbFinder" Grid.Row="1" Grid.Column="0" TextChanged="tbFinder_TextChanged"/>
+        <ComboBox Name="cbSort" Grid.Row="1" Grid.Column="1" SelectionChanged="cbSort_SelectionChanged"/>
+        <ComboBox Name="cbFilter" Grid.Row="1" Grid.Column="2" SelectionChanged="cbSort_SelectionChanged"/>
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <TextBlock Text="Записей: "/>
+            <TextBlock Name="tbCount"/>
+            <TextBlock Text=" из "/>
+            <TextBlock Name="tbAllCount"/>
+        </StackPanel>
+
+        <ListView Name="lvProducts" Grid.Row="2" Grid.ColumnSpan="4" IsVisibleChanged="lvProducts_IsVisibleChanged" MouseDoubleClick="lvProducts_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Fill="{Binding validColor}" Grid.ColumnSpan="4"/>
+
+                        <Image Source="{Binding validImage}" Grid.Column="0" Width="120"/>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="{Binding ProductName}"/>
+                            <TextBlock Text="{Binding ProductDescription}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Производители: "/>
+                                <TextBlock Text="{Binding Manufacturer}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Стоимость: "/>
+                                <TextBlock Text="{Binding ProductCost}"/>
+                            </StackPanel>
+                            
+                            
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                            <TextBlock Text="Наличие на складе: "/>
+                            <TextBlock Text="{Binding ProductQuantityInStock}"/>
+                        </StackPanel>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Name="btnAdd" Content="Добавить товар" Grid.Row="3" Grid.ColumnSpan="4" Click="btnAdd_Click" HorizontalAlignment="Left"/>
+
+    </Grid>
+</Page>
